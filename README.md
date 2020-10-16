@@ -12,3 +12,4 @@ on S3 Amazon Storage Cloud.
 A. Genthon
 A. Guibert
 R. Huguenot
+V. Moreau
