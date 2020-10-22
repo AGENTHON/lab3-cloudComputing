@@ -33,20 +33,6 @@ def process_marks(msg_body):
     mid = len(marks_list) // 2
     median = (marks_list[mid] + marks_list[~mid]) / 2
 
-    # output result
-    print( "Maximum mark: " + str(max_mark) )
-    print( "Minimum mark: " + str(min_mark) )
-    print( "Mean of marks: " + str(mean) )
-    print( "Median of marks: " + str(median) )
+    # output result : max/min/mean/median
+    return str(max_mark) + "/" + str(min_mark) + "/" + str(mean) + "/" + str(median)
 
-
-""" Tests """
-
-
-# process_marks() renvoie une erreur custom
-
-process_marks(7, 4, 15)
-
-print("")
-
-process_marks(8, 9, 10, 17, 8, 20, 20, 9)
