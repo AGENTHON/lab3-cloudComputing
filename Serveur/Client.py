@@ -15,7 +15,7 @@ try:
     queue = sqs.get_queue_by_name(QueueName=QUEUE_NAME)
 except:
     # If queue does not exist, create one (we use FIFO queue here)
-    queue = sqs.create_queue(QueueName=QUEUE_NAME, Attributes={'FifoQueue': 'true', 'DelaySeconds': '5'})
+    queue = sqs.create_queue(QueueName=QUEUE_NAME, Attributes={'FifoQueue': 'true', 'DelaySeconds': '5', 'ContentBasedDeduplication': 'true'})
 
 
 
@@ -38,5 +38,4 @@ for integer in integers:                                # ex : '78/23/56'
 string = string[:-1]                                    #
 
 print("Sending='"+string+"'")
-# Par contre j'ai pas très bien compris le fonctionnement du <MessageGroupId> et du <MessageDeduplicationId>
-response = queue.send_message(MessageBody=string, MessageGroupId='messages', MessageDeduplicationId=str(1))
+response = queue.send_message(MessageBody=string, MessageGroupId='messages')
