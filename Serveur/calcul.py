@@ -34,5 +34,9 @@ def process_marks(msg_body):
     median = (marks_list[mid] + marks_list[~mid]) / 2
 
     # output result : max/min/mean/median
-    return str(max_mark) + "/" + str(min_mark) + "/" + str(mean) + "/" + str(median)
+    resultat = "Max: " + str(max_mark) + "\n"
+    resultat += "Min: " + str(min_mark) + "\n"
+    resultat += "Mean: " + str(mean) + "\n"
+    resultat += "Median: " + str(median)
+    return resultat
 
