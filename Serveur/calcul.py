@@ -1,19 +1,23 @@
 """ First part with EC2 and a Python program """
-import sys
 
-def process_marks(*args):
+def parser(msg_body):
+    # input : msg body from queue
+    # output : list of marks as integers
+    
+    marks = msg_body.split("/")
+    int_marks = []
+    for mark in marks:
+        int_mark = int(mark)
+        int_marks.append(int_mark)
+    return int_marks
+
+
+def process_marks(msg_body):
     # input : marks_list = marks (as float) of students
     # output : mean, median, max, min of given marks
     
-    # raise an error if no marks were given
-    if len(args) == 0:
-        print("FunctionError: Not enough marks were given")
-        sys.exit(1)
-    
     # create list of marks and sort it (for median calc)
-    marks_list = []
-    for mark in args:
-        marks_list.append(mark)
+    marks_list = parser(msg_body)
     marks_list.sort()
 
     # maximum mark
