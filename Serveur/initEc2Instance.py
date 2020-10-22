@@ -12,10 +12,11 @@ def initInstance() :
     installPackets(client)
     sendPythonFiles(client)
 
-    stdin, stdout, stderr = client.exec_command('python3 myfile.py')
-    print("Error : %s" % stderr.read())
-    print("Out : %s" % stdout.read())
-    client.close()
+    # Pour tester
+    #stdin, stdout, stderr = client.exec_command('python3 myfile.py')
+    #print("Error : %s" % stderr.read())
+    #print("Out : %s" % stdout.read())
+    #client.close()
 
 
 def createEc2Instance(key_pair_file_name) :
@@ -126,6 +127,6 @@ def sendPythonFiles(client) :
     ftp_client.put('myfile.py','myfile.py')
     ftp_client.close()
 
-initInstance()
+#initInstance()
 
 
