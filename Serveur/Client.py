@@ -5,7 +5,7 @@ import boto3
 # Then it parse those integers and format them in new string like : "78/65/12/32"
 # Finally it send this string in queue created before
 
-QUEUE_NAME = 'MyQueue.fifo'
+QUEUE_NAME = 'requestQueue.fifo'
 
 # Get the service resource
 sqs = boto3.resource('sqs')
