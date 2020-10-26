@@ -13,10 +13,11 @@ def initInstance() :
     sendPythonFiles(client)
 
     # Pour tester
-    #stdin, stdout, stderr = client.exec_command('python3 myfile.py')
-    #print("Error : %s" % stderr.read())
-    #print("Out : %s" % stdout.read())
-    #client.close()
+    stdin, stdout, stderr = client.exec_command('python3 myfile.py')
+    print("Error : %s" % stderr.read())
+    print("Out : %s" % stdout.read())
+    
+    client.close()
 
 
 def createEc2Instance(key_pair_file_name) :
