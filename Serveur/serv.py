@@ -72,7 +72,7 @@ except:
     
     
     
-#Récupération et traitement des info en continu
+#Recuperation et traitement des info en continu
 while 1 :
 # Process messages by printing out body and optional author name
     for message in queue.receive_messages(MessageAttributeNames=['Author']):
