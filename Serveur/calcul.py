@@ -25,5 +25,10 @@ def process_marks(marks_list):
     resultat += "Min: " + str(min_mark) + "\n"
     resultat += "Mean: " + str(mean) + "\n"
     resultat += "Median: " + str(median)
-    return resultat
+    
+    # output raw_result
+    raw_result = "Max: " + str(max_mark) + " Min: " + str(min_mark) + " Mean: " + str(mean) + " Median: " + str(median)
+    
+    # return strings
+    return [resultat, raw_result]
 
