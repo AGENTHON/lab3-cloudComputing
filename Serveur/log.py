@@ -1,5 +1,5 @@
 """ Create log file for AWS bucket """
-import datetime
+import os, datetime
 
 def create_log_txt(liste, result):
     # Entrees :
@@ -15,6 +15,6 @@ def create_log_txt(liste, result):
     fichier_log.close()
 
 
-# Test
+def delete_log_txt():
+    os.remove("fichier_log.txt")
 
-create_log_txt("1/2/3", "1 3 2 2")
