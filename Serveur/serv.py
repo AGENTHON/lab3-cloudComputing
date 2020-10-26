@@ -23,6 +23,7 @@ def create_log_txt(liste, result):
 def delete_log_txt():
     os.remove("fichier_log.txt")
 
+#Parse an input as number separated by / as a list
 def parse(input):
     # input is a string
     # output is a list of floats
@@ -77,7 +78,7 @@ def process_marks(marks_list):
 
 
 
-#script a faire tourner sur l'instance pour récuperer les données de la queue.
+#script a faire tourner sur l'instance pour recuperer les donnees de la queue.
 
 
 
@@ -107,7 +108,7 @@ while 1 :
         result = process_marks(parse(message.body))
 
         # affichage du resultat
-        print('MESSAGE , {0}{1}'.format(message.body, result[0]))
+        print('MESSAGE , {0} \n {1}'.format(message.body, result[0]))
            
         #Creation des logs
         create_log_txt(message.body, result[1])
