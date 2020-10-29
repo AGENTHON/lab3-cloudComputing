@@ -9,7 +9,9 @@ requestQueue, responseQueue = initQueues.initQueues()
 # Install all necessary packages
 # Send EC2 worker's python files on instance
 # Run EC2 worker on instance
-initEc2Instance.initInstance()
+initialization = input("Initialize the instance ?:(y/n) ")
+if (initialization=='y'):
+     initEc2Instance.initInstance()
 
 print()
 print()
