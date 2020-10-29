@@ -12,12 +12,20 @@ def create_log_txt(liste, result):
     # result = la sortie raw_result de process_marks()
     now = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     liste = liste.replace("/", " ")
-    
-    fichier_log = open("fichier_log.txt", "w")
+    # timestamp
+    ts = str(datetime.datetime.now().timestamp()).replace('.','_')
+    # nom du fichier
+    log_name="log"+ts+".txt"
+    fichier_log = open(log_name, "w")
     fichier_log.write(now + "\n")
     fichier_log.write(liste + "\n")
     fichier_log.write(result + "\n")
     fichier_log.close()
+    # Si non créé, création du bucket, et ajout du log
+    s3 = boto3.resource('s3')
+    s3.create_bucket(ACL='public-read-write', Bucket='logs1684237')
+    s3_cli = boto3.client('s3')
+    s3_cli.upload_file(log_name, "logs1684237", log_name)
 
 
 def delete_log_txt():
