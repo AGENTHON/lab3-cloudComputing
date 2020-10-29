@@ -1,8 +1,18 @@
 import boto3
 import initEc2Instance
 import initQueues
+'''
+print("Please enter your aws crendentials ...")
+aws_access_key_id = input("aws_access_key_id : ")
+aws_secret_access_key = input("aws_secret_access_key : ")
+aws_session_token = input("aws_session_token : ")
 
-
+boto3Session = boto3.Session(
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    aws_session_token=aws_session_token
+)
+'''
 # Create requestQueue and responseQueue
 requestQueue, responseQueue = initQueues.initQueues()
 
@@ -11,7 +21,6 @@ requestQueue, responseQueue = initQueues.initQueues()
 # Send EC2 worker's python files on instance
 # Run EC2 worker on instance
 initEc2Instance.initInstance()
-
 
 # Client part
 # This script ask some integers from console to user. Ex : 78 65 12 32
