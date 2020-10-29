@@ -2,7 +2,6 @@ import boto3
 import sys
 import os, datetime
 
-
 """ Create log file for AWS bucket """
 
 
@@ -21,9 +20,7 @@ def create_log_txt(liste, result):
     fichier_log.write(liste + "\n")
     fichier_log.write(result + "\n")
     fichier_log.close()
-    # Si non créé, création du bucket, et ajout du log
-    s3 = boto3.resource('s3')
-    s3.create_bucket(ACL='public-read-write', Bucket='logs1684237')
+    # ajout du log dans le bucket
     s3_cli = boto3.client('s3')
     s3_cli.upload_file(log_name, "logs1684237", log_name)
 
