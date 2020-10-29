@@ -119,7 +119,7 @@ while 1 :
         #renvoyer  le resultat :
             
         #création d'une nouvelle queue :
-        Rqueue = sqs.create_queue(QueueName="responseQueue.fifo", Attributes={'FifoQueue': 'true', 'DelaySeconds': '5', 'ContentBasedDeduplication': 'true'})
+        Rqueue = sqs.get_queue_by_name(QueueName="responseQueue.fifo")
             
         #envoi du message
         response = Rqueue.send_message(MessageBody=result[0], MessageGroupId='messages')
