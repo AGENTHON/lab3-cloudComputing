@@ -1,18 +1,7 @@
 import boto3
 import initEc2Instance
 import initQueues
-'''
-print("Please enter your aws crendentials ...")
-aws_access_key_id = input("aws_access_key_id : ")
-aws_secret_access_key = input("aws_secret_access_key : ")
-aws_session_token = input("aws_session_token : ")
 
-boto3Session = boto3.Session(
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    aws_session_token=aws_session_token
-)
-'''
 # Create requestQueue and responseQueue
 requestQueue, responseQueue = initQueues.initQueues()
 
@@ -21,6 +10,10 @@ requestQueue, responseQueue = initQueues.initQueues()
 # Send EC2 worker's python files on instance
 # Run EC2 worker on instance
 initEc2Instance.initInstance()
+
+print()
+print()
+print()
 
 # Client part
 # This script ask some integers from console to user. Ex : 78 65 12 32
@@ -46,3 +39,28 @@ string = string[:-1]                                    #
 
 print("Sending='"+string+"'")
 response = requestQueue.send_message(MessageBody=string, MessageGroupId='messages')
+
+
+
+#
+# Get and display response message from responseQueue
+#
+print()
+print("Waiting for results ...")
+print()
+not_received = True
+while not_received :
+# Process messages by printing out body and optional author name
+    for message in responseQueue.receive_messages(MessageAttributeNames=['Author']):
+    # Get the custom author message attribute if it was set
+        author_text = ''
+        if message.message_attributes is not None:
+            author_name = message.message_attributes.get('Author').get('StringValue')
+            if author_name:
+                author_text = ' ({0})'.format(author_name)
+
+        #calcul du resultat
+        print(message.body)
+        not_received = False
+
+        message.delete()

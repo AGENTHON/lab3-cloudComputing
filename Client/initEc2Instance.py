@@ -11,6 +11,7 @@ KEY_PAIR_FILE_NAME = 'lab3-ec2-keypair'
 USERNAME = 'ec2-user'
 
 def initInstance() :
+    print("Starting init EC2 instance ...")
     key_pair_file_name = KEY_PAIR_FILE_NAME
     instance_public_dns = createEc2Instance(key_pair_file_name)
     #instance_public_dns='ec2-18-206-253-121.compute-1.amazonaws.com'
@@ -20,6 +21,7 @@ def initInstance() :
     startEc2Worker(client)
     
     client.close()
+    print("Init Ec2 instance done.")
 
 
 def createEc2Instance(key_pair_file_name) :
@@ -131,11 +133,7 @@ def sendEc2WorkerPythonFiles(client) :
     local_home = expanduser("~")
     remote_home = "/home/"+USERNAME
 
-    ftp_client.put('Serveur/serv.py',remote_home+'/serv.py')
-    
-    ftp_client.close()
-    time.sleep(5)
-    ftp_client=client.open_sftp()
+    ftp_client.put('../Serveur/serv.py',remote_home+'/serv.py')
 
     local_aws = local_home+'/.aws'
     remote_aws = remote_home+'/.aws'
@@ -146,16 +144,11 @@ def sendEc2WorkerPythonFiles(client) :
     print("Sending aws config ...")
     ftp_client.put(local_aws+'/config', remote_aws+'/config')
 
-    ftp_client.close()
-    time.sleep(5)
-    ftp_client=client.open_sftp()
-
     print("Sending aws credentials ...")
     ftp_client.put(local_aws+'/credentials', remote_aws+'/credentials')
 
-    print("Done sending all worker files.")
-
     ftp_client.close()
+    print("Done sending all worker files.")
 
 def startEc2Worker(client) :
     #stdin, stdout, stderr = client.exec_command('ls ~/.aws')
@@ -163,9 +156,7 @@ def startEc2Worker(client) :
     #print("Error : %s" % stderr.read())
     #print("Out : %s" % stdout.read())
 
-    stdin, stdout, stderr = client.exec_command('nohup python3 serv.py &')
-    print("Error : %s" % stderr.read())
-    print("Out : %s" % stdout.read())
+    client.exec_command('nohup python3 serv.py &')
 
 '''
 def sendEc2WorkerPythonFiles(client) :
